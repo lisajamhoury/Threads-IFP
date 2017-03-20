@@ -7,6 +7,7 @@ boolean emg6 = false;
 boolean emg7 = false;
 boolean emg8 = false;
 boolean triangle = false;
+boolean fakeTriangle = false;
 boolean pulse1 = false;
 boolean pulse2 = false;
 boolean pulse3 = false; 
@@ -19,7 +20,66 @@ boolean pulseTimerStarted = false;
 boolean sloMo = false;
 float currentMinSpeed = 0;
 
+void keyPressed() {
+  println("yes");
+  char inKeyChar = key;
+  processControls(inKeyChar);
+}
 
+
+void generateKeyPress() {
+  //0:00
+  if (frameCount == 1) processControls('7'); // pulse on
+  //0:08
+  if (frameCount == 480) processControls('1'); // emg on
+  //0:35
+  if (frameCount == 2100) { 
+    processControls('3');
+    processControls('8'); // hide pulse
+  }
+  //1:10
+  if (frameCount == 4200) processControls('4');
+  //1:27
+  if (frameCount == 5220) processControls('5');
+  //1:44
+  if (frameCount == 6240) {
+    processControls('6');
+    processControls('t');
+    //fakeTriangle = true;
+    EMG1UPPER = 150; // reset high for performer!!
+    EMG2UPPER = 150; // reset high for performer!!
+    minSpeed = 0.0000004; //abritrary speed up
+    
+  }
+  //2:19
+  if (frameCount == 8340) { 
+    processControls('5');
+    minSpeed = 0.00000007; //slow back down
+  }  
+  //2:28
+  if (frameCount == 8880) {
+    processControls('4');
+    processControls('y');
+    //fakeTriangle = false;
+    EMG1UPPER = 500; // reset high for performer!!
+    EMG2UPPER = 500; // reset high for performer!!
+  }
+  //2:36
+  if (frameCount == 9360) processControls('3');
+  //2:41
+  if (frameCount == 9660) processControls('1');
+  //2:45
+  if (frameCount == 9900) {
+    processControls('0');
+    processControls('9');
+  }
+  //2:54 
+  if (frameCount == 10440) processControls('o');
+  //3:03
+  //if (frameCount == 10980) processControls('o');
+
+}
+  
 
 void processControls(char inKeyChar) {
   if (inKeyChar == '1') {
@@ -99,6 +159,7 @@ void processControls(char inKeyChar) {
     if (triangle == false) {
       triangle = true; 
     }
+    
   }
   
   if (inKeyChar == 'y') {
@@ -274,7 +335,7 @@ void runControls() {
         //begin timer
         pulseTimerStarted = true;
         println("timer started");
-        pulseStartTime = millis();
+        pulseStartTime = msPassed; // replace millis with fake millis
         pulseIncTimeX = pulseStartTime;
         pulseIncTimeY = pulseStartTime;
       }

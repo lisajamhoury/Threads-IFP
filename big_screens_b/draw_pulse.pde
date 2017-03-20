@@ -54,22 +54,22 @@ void setupMultiPulse() {
 
 
 void expandPulseBounds() {
- int pulseTimeElapsedX = millis() - pulseIncTimeX;
- int pulseTimeElapsedY = millis() - pulseIncTimeY;
+ int pulseTimeElapsedX = msPassed - pulseIncTimeX;
+ int pulseTimeElapsedY = msPassed - pulseIncTimeY;
  
  if (pulseTimeElapsedX > pulseExpandUnitX) {
    if (pulseBoundX <= targetBoundX+5) { // stop incrementing when all columns are in bounds. need to take into account pulse ctr shift
      pulseBoundX++;
    }
        
-   pulseIncTimeX = millis();
+   pulseIncTimeX = msPassed;
  }
  
  if (pulseTimeElapsedY > pulseExpandUnitY) {
    if (pulseBoundY <= targetBoundY) {
      pulseBoundY++;
    }
-   pulseIncTimeY = millis();
+   pulseIncTimeY = msPassed;
  } 
 }
 
@@ -111,13 +111,13 @@ void drawMultiPulse(){
  if (growing == false) {
    if (removePulsesSet == false) {
      pulsesToRemove = multiPulses.size();  
-     removePulseTime = millis();
+     removePulseTime = msPassed;
      removeEachInc = pulsesToRemove / removeIncs;
      removePulsesSet = true;
      println(pulsesToRemove, removeEachInc);
    }
       
-   if (millis() > removePulseTime + removeRate) {
+   if (msPassed > removePulseTime + removeRate) {
      if (multiPulses.size() > removeEachInc) { 
        for (int i = 0; i < removeEachInc; i++) {
          int pos = multiPulses.size() - 1;
@@ -127,7 +127,7 @@ void drawMultiPulse(){
       int pos = multiPulses.size() - 1;
       multiPulses.remove(pos);
     }  
-   removePulseTime = millis();
+   removePulseTime = msPassed;
  }
    
  } // growing false 

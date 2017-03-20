@@ -27,20 +27,21 @@ int currentBpm;
 boolean pulse = false;
 
 void setupProcessData() {
-  pulseTimeCtr = millis();
+  pulseTimeCtr = msPassed;
 }
 
 void getSensorData() { 
- emg1LeftSensor = mapEmgData(emg1L, EMG1LOWER, EMG1UPPER);
- emg1RightSensor = mapEmgData(emg1R, EMG1LOWER, EMG1UPPER);
- emg2LeftSensor = mapEmgData(emg2L, EMG2LOWER, EMG2UPPER); 
- emg2RightSensor = mapEmgData(emg2R, EMG2LOWER, EMG2UPPER);
+ //emg1LeftSensor = mapEmgData(emg1L, EMG1LOWER, EMG1UPPER);
+ //emg1RightSensor = mapEmgData(emg1R, EMG1LOWER, EMG1UPPER);
+ //emg2LeftSensor = mapEmgData(emg2L, EMG2LOWER, EMG2UPPER); 
+ //emg2RightSensor = mapEmgData(emg2R, EMG2LOWER, EMG2UPPER);
  
  //IF RUNNING OFF OF FAKE DATA SWITCH SENSOR SIDES
- //emg2LeftSensor = mapEmgData(emg1L, EMG1LOWER, EMG1UPPER);
- //emg2RightSensor = mapEmgData(emg1R, EMG1LOWER, EMG1UPPER);
- //emg1LeftSensor = mapEmgData(emg2L, EMG2LOWER, EMG2UPPER); 
- //emg1RightSensor = mapEmgData(emg2R, EMG2LOWER, EMG2UPPER);
+ emg2LeftSensor = mapEmgData(emg1L, EMG1LOWER, EMG1UPPER);
+ emg2RightSensor = mapEmgData(emg1R, EMG1LOWER, EMG1UPPER);
+ emg1LeftSensor = mapEmgData(emg2L, EMG2LOWER, EMG2UPPER); 
+ emg1RightSensor = mapEmgData(emg2R, EMG2LOWER, EMG2UPPER);
+ 
  pulseSensor = polar0;
  
  calculateBpm();
@@ -62,7 +63,7 @@ float mapEmgData(float sensorReading, int lowerBound, int upperBound) {
 
 
 void calculateBpm() {
- int timeElapsed = millis() - pulseTimeCtr; 
+ int timeElapsed = msPassed - pulseTimeCtr; 
 
  if (pulseSensor == 1 && lastPulseSensorVal == 0) {
    pulseCtr++;
@@ -71,7 +72,7 @@ void calculateBpm() {
  if (timeElapsed > BPMTIMESPAN) {
   currentBpm = (ONEMINUTE/BPMTIMESPAN)*pulseCtr; 
   currentBpm = limitBpm(currentBpm, LOWBPM, HIGHBPM);
-  pulseTimeCtr = millis();
+  pulseTimeCtr = msPassed;
   pulseCtr = 0;
  }
  lastPulseSensorVal = pulseSensor;

@@ -95,6 +95,17 @@ void drawEmgVehicles() {
   }
 }
 
+void drawFakeTriangle(int chance) {
+  if (chance == 50) {
+    fill(255);  
+    beginShape();
+    vertex(0, height);
+    vertex(width, 0);
+    vertex(width, height);
+    endShape();
+  }
+}
+
 void drawBigTriangle() {
   String emg1Logic = emgLogic(emg1LeftSensor, emg1RightSensor);
   String emg2Logic = emgLogic(emg2LeftSensor, emg2RightSensor);

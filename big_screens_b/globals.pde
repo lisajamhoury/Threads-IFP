@@ -13,11 +13,11 @@ int rows;
 
 void setupGlobals() {  
   //Set positioning constants
-  PULSECTR = new PVector(0.44*width, 0.44*height);
-  LEFTEMGCTR = new PVector(0.16*width, 0.44*height);
-  RIGHTEMGCTR = new PVector(0.72*width, 0.44*height);
-  ONETHIRD = 0.31*width;
-  TWOTHIRD = 0.57*width;
+  PULSECTR = new PVector(0.5*width, 0.5*height);
+  LEFTEMGCTR = new PVector(0.16*width, 0.5*height);
+  RIGHTEMGCTR = new PVector(0.82*width, 0.5*height);
+  ONETHIRD = 0.33*width;
+  TWOTHIRD = 0.66*width;
   AREA = width * height;
   
   resolution = floor(width/180); // scale resolution to canvas size 

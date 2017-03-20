@@ -24,7 +24,7 @@ class PulseMarker {
     location = iLoc;
     bpm = currentBpm;
     timeBtwBeats = ONEMINUTE/bpm;
-    prevBeatTime = millis();
+    prevBeatTime = msPassed;
     initSize = map(currentBpm, LOWBPM, HIGHBPM, resolution, pulseSmall); // reverse mapping, slower is larger
     size = initSize;
     acceleration = new PVector(0,0);
@@ -71,11 +71,11 @@ class PulseMarker {
     if (drawMarker == true) {
       if (animate == true) animate();
    
-      timeSinceBeat = millis() - prevBeatTime;
+      timeSinceBeat = msPassed - prevBeatTime;
       
       if (timeSinceBeat > timeBtwBeats) {
         size = lerp(size, initSize * pulseSzMultiplier, lerpAmount);
-        prevBeatTime = millis();
+        prevBeatTime = msPassed;
       } else {
         size = lerp(size, initSize, lerpAmount);
       }
