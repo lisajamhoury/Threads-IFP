@@ -1,7 +1,9 @@
 void setup() {
+  //size(9024, 800, P3D); // ifp resolution
+  size(5000, 443, P3D); // my display ifp res
   //size(11520, 1080, P3D);
   //size(5760, 540, P3D);
-  size(5000, 469, P3D); // my display
+  //size(5000, 469, P3D); // my display
   //fullScreen(P3D);
   //size(2880, 270, P3D);
   //size(3840,360, P3D);
