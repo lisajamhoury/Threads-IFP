@@ -37,7 +37,13 @@ void draw() {
     drawFakeTriangle(randNum); 
   }
 
-  
+  if (frameCount <= 3600) {
+    println("saving");
+    String savePath = "../test/test-######.png";
+    saveFrame(savePath);
+  } else {
+    println("done saving");
+  }
   //if (debugFlowField == true) {
   //  debugFlowField();
   //}
