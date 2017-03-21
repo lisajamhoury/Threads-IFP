@@ -1,6 +1,6 @@
 void setup() {
-  //size(9024, 800, P3D); // ifp resolution
-  size(5000, 443, P3D); // my display ifp res
+  size(9024, 800, P3D); // ifp resolution
+  //size(5000, 443, P3D); // my display ifp res
   //size(11520, 1080, P3D);
   //size(5760, 540, P3D);
   //size(5000, 469, P3D); // my display
@@ -9,7 +9,7 @@ void setup() {
   //size(3840,360, P3D);
   //size(1920, 180, P3D); //Aaron's projector 
   //size(1440, 135, P3D);
-  surface.setLocation(0,0);
+  //surface.setLocation(0,0);
   
   //frameRate(fps); // global set in csv_data
   
@@ -37,10 +37,13 @@ void draw() {
     drawFakeTriangle(randNum); 
   }
 
-  if (frameCount <= 3600) {
-    println("saving");
-    String savePath = "../test/test-######.png";
-    saveFrame(savePath);
+  if (frameCount <= 11220) {
+    if (frameCount%2 == 0) {
+      //println("saving");
+      String savePath = "/Volumes/Gibson/Lisa/threads/threads-######.png";
+      //String savePath = "threads/threads-######.png";
+      saveFrame(savePath);
+    }
   } else {
     println("done saving");
   }
